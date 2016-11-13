@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>3D image Ring</title>
+<style>
+	*{
+		margin:0; 
+		padding:0;
+		}
+	body{ 
+	background:#000;
+	overflow:hidden;
+	}
+	ul{ 
+	width:133px; 
+	height:200px; 
+	margin:200px auto; 
+	-webkit-transform-style:preserve-3d; 
+	-webkit-transform: perspective(800px) rotateY(0deg) rotateX(0deg);
+	 position:relative;
+	 }
+	ul li{ 
+	position:absolute; top:0; left:0; 
+	width:100%; 
+	height:100%; 
+	border-radius:20px; 
+	box-shadow:0px 0px 20px #fff; 
+	overflow:hidden; 
+	-webkit-transform: rotateY(0deg) translateZ(0px);
+	}
+	ul li img{ 
+	width:100%; 
+	height:100%;
+	}
+</style>
+<script>
+window.onload = function(){
+	var oUl = document.querySelector('ul');
+	var aLi = oUl.children;
+	var N = 11;
+	for(var i=0;i<N;i++){
+		aLi[i].style.WebkitTransition = '1s all ease '+(N-i)*100+'ms';
+		
+		aLi[i].style.WebkitTransform = 'rotateY('+360/N*i+'deg) translateZ(350px)';
+	}
+	
+	var x = 0; 			
+	var y = 0; 			
+	var iSpeedX = 0;
+	var iSpeedY = 0;
+	var lastX = 0;
+	var lastY = 0;
+	oUl.onmousedown = function(ev){
+		var disX = ev.pageX-y;
+		var disY = ev.pageY-x;
+		document.onmousemove = function(ev){
+			x = ev.pageY-disY;
+			y = ev.pageX-disX;
+			
+			oUl.style.WebkitTransform = 'perspective(800px) rotateY('+y/5+'deg) rotateX('+-x/5+'deg)';
+			
+			iSpeedX = ev.pageX-lastX;
+			iSpeedY = ev.pageY-lastY;
+			lastX = ev.pageX;
+			lastY = ev.pageY;
+		};
+		document.onmouseup = function(){
+			document.onmousemove = null;
+			document.onmouseup = null;
+			clearInterval(oUl.timer);
+			oUl.timer = setInterval(function(){
+				x+= iSpeedY;
+				y+= iSpeedX;
+				oUl.style.WebkitTransform = 'perspective(800px) rotateY('+y/5+'deg) rotateX('+-x/5+'deg)';
+				iSpeedX*=0.95;
+				iSpeedY*=0.95;
+				if(Math.abs(iSpeedX)<1)iSpeedX=0;
+				if(Math.abs(iSpeedY)<1)iSpeedY=0;
+				if(iSpeedX==0&&iSpeedY==0){
+					clearInterval(oUl.timer);
+				}
+			},30);
+		};
+		return false;
+	};
+};
+</script>
+</head>
+
+<body>
+	<ul>
+		<li><img src="img2/4.jpg" /></li>
+		<li><img src="img2/2.jpg" /></li>
+		<li><img src="img2/3.jpg" /></li>
+		<li><img src="img2/1.jpg" /></li>
+		<li><img src="img2/5.jpg" /></li>
+		<li><img src="img2/6.jpg" /></li>
+		<li><img src="img2/7.jpg" /></li>
+		<li><img src="img2/8.jpg" /></li>
+		<li><img src="img2/9.jpg" /></li>
+		<li><img src="img2/10.jpg" /></li>
+		<li><img src="img2/11.jpg" /></li>
+	</ul>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
