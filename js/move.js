@@ -1,6 +1,7 @@
 function getStyle(obj,sName){
 	return (obj.currentStyle||getComputedStyle(obj,false))[sName];
 }
+
 function move(obj,json,options){
 	options = options||{};
 	options.duration = options.duration||700;
@@ -8,10 +9,12 @@ function move(obj,json,options){
 	
 	var start = {};
 	var dis = {};
+	
 	for(var name in json){
 		start[name] = parseFloat(getStyle(obj,name));
 		dis[name] = json[name]-start[name];
 	}
+	
 	var count = Math.floor(options.duration/30);
 	var n = 0;
 	clearInterval(obj.timer);

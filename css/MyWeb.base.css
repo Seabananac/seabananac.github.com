@@ -405,7 +405,7 @@ b, strong {
   background-size: 90%; }
 
 .social-links li .fadeInUp2:hover {
-  background: url(images/tw2.png) no-repeat center;
+  background: url(../images/tw2.png) no-repeat center;
   background-size: 90%; }
 
 .social-links li .fadeInUp3 {
@@ -413,7 +413,7 @@ b, strong {
   background-size: 100%; }
 
 .social-links li .fadeInUp3:hover {
-  background: url(images/google-plus2.png) no-repeat center;
+  background: url(../images/google-plus2.png) no-repeat center;
   background-size: 100%; }
 
 .social-links li .fadeInUp4 {
